@@ -9,12 +9,13 @@ class Product < ApplicationRecord
 
   after_commit -> { broadcast_refresh_later_to "products" }
 
+  private
   def acceptable_image
     return unless image.attached?
 
     acceptable_types = [ "image/gif", "image/jpeg", "image/png" ]
     unless acceptable_types.include?(image.content_type)
-      error.add(:image, "must be a GIF, JPG, or PNG image")
+      errors.add(:image, "must be a GIF, JPG, or PNG image")
     end
   end
 end
