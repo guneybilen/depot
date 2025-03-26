@@ -5,7 +5,7 @@ class Product < ApplicationRecord
   validates :title, uniqueness: true
   validates :price, numericality: { greater_than_or_equal_to: 0.01 }
 
-  validate :acceptble_image
+  validate :acceptable_image
 
   after_commit -> { broadcast_refresh_later_to "products" }
 
@@ -13,7 +13,7 @@ class Product < ApplicationRecord
     return unless image.attached?
 
     acceptable_types = [ "image/gif", "image/jpeg", "image/png" ]
-    unless acceptable_types.include?(image.content_tpye)
+    unless acceptable_types.include?(image.content_type)
       error.add(:image, "must be a GIF, JPG, or PNG image")
     end
   end
