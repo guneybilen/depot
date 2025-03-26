@@ -34,6 +34,13 @@ class ProductTest < ActiveSupport::TestCase
     product.image.attach(io: File.open("test/fixtures/files/logo.svg"), filename: "logo.svg", content_type: "image/svg+xml")
     assert_not product.valid?, "image/svg+xml must be invalid"
   end
+  
+  test "Book title length should be at least 10 characters" do
+    product = Product.new(title: "My", description: "yyy", price: 1)
+    product.image.attach(io: File.open("test/fixtures/files/lorem.jpg"), filename: "lorem.jpg", content_type: "image/jpeg")
+    assert_not product.valid?, "title field must be at leat 10 characters in length"
+  end
+
 
   test "product is not valid without a unique title" do
     product = Product.new(title: products(:pragprog).title, description: "yyy", price: 1)
