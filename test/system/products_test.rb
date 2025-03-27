@@ -3,6 +3,7 @@ require "application_system_test_case"
 class ProductsTest < ApplicationSystemTestCase
   setup do
     @product = products(:one)
+    @title = "The Great Book #{rand(1000)}"
   end
 
   test "visiting the index" do
@@ -11,12 +12,15 @@ class ProductsTest < ApplicationSystemTestCase
   end
 
   test "should create product" do
+    file = file_fixture_upload("lorem.jpg", "image/jpeg")
     visit products_url
     click_on "New product"
 
     fill_in "Description", with: @product.description
     fill_in "Price", with: @product.price
-    fill_in "Title", with: @product.title
+    fill_in "Title", with: @title
+    
+    attach_file("product_image", file.path)
     click_on "Create Product"
 
     assert_text "Product was successfully created"
@@ -29,7 +33,7 @@ class ProductsTest < ApplicationSystemTestCase
 
     fill_in "Description", with: @product.description
     fill_in "Price", with: @product.price
-    fill_in "Title", with: @product.title
+    fill_in "Title", with: @title
     click_on "Update Product"
 
     assert_text "Product was successfully updated"
@@ -43,3 +47,5 @@ class ProductsTest < ApplicationSystemTestCase
     assert_text "Product was successfully destroyed"
   end
 end
+   
+
