@@ -9,7 +9,7 @@ module ActiveSupport
 
     # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
     fixtures :all
-     self.file_fixture_path = Rails.root.join("test/fixtures/files")
+    self.file_fixture_path = Rails.root.join("test/fixtures/files")
     # Add more helper methods to be used by all tests here...
     
     def file_fixture_upload(filename, mime_type = "application/octet-stream")
