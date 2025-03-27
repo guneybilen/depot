@@ -1,0 +1,22 @@
+<% content_for :title, "Carts" %>
+
+<div class="w-full">
+  <% if notice.present? %>
+    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-md inline-block" id="notice"><%= notice %></p>
+  <% end %>
+
+  
+  <div id="carts" class="min-w-full divide-y divide-gray-200 space-y-5">
+    <% if @carts.any? %>
+      <% @carts.each do |cart| %>
+    
+        <!-- div class="flex flex-col sm:flex-row justify-between items-center pb-5 sm:pb-0">
+          <%= render cart %>
+         
+        </div>
+      <% end %>
+    <% else %>
+      <p class="text-center my-10">No carts found.</p>
+    <% end %>
+  </div>
+</div>
