@@ -34,6 +34,8 @@
           <li><a href="/questions">Questions</a></li>
           <li><a href="/news">News</a></li>
           <li><a href="/contact">Contact</a></li>
+          <li><%= Date.today.strftime("%B %d, %Y") %></li>
+          <li><%= Time.now.strftime("%H:%M:%S %p") %></li>
         </ul>
       </nav>
       <main class="container mx-auto mt-28 px-5 flex">

@@ -5,7 +5,11 @@ class StoreControllerTest < ActionDispatch::IntegrationTest
     get store_index_url
     assert_response :success
     assert_select "nav a", minimum: 4
+    assert_select "main", 1
     assert_select "main ul li", 3
+    assert_select "nav ul li", 6
+    assert_select "main ul", 1
+    assert_select "img", 4
     assert_select "h2", "The Pragmatic Programmer"
     assert_select "div", /\$[,\d]+\.\d\d/
   end
