@@ -9,7 +9,7 @@ class StoreControllerTest < ActionDispatch::IntegrationTest
     assert_select "nav a", minimum: 4
     assert_select "main", 1
     assert_select "main ul li", 3
-    assert_select "nav ul li", 6
+    assert_select "nav ul li", 4
     assert_select "main ul", 1
     #FYI: The 4th img is the logo on top of the page that comes from the layout.
     assert_select "img", 4
