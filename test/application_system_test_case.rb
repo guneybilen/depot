@@ -12,6 +12,6 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   # Set up Selenium directly with the Chromedriver path
   Selenium::WebDriver::Chrome::Service.driver_path = '/usr/local/bin/chromedriver'
 
-  driven_by :selenium, using: :chrome, screen_size: [ 1400, 1400 ]
+  driven_by :selenium, using: :headless_chrome, screen_size: [ 1400, 1400 ]
  
 end
