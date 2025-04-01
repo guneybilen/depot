@@ -59,12 +59,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_31_003305) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.string "name"
+    t.text "name"
     t.text "address"
-    t.string "email"
-    t.integer "pay_type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.text "email"
+    t.integer "pay_type", null: false
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
   end
 
   create_table "products", force: :cascade do |t|
