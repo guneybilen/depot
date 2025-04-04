@@ -37,6 +37,23 @@ Rails.application.configure do
   # Make template changes take effect immediately.
   config.action_mailer.perform_caching = false
 
+
+  # by bilen
+  config.action_mailer.delivery_method = :smtp
+
+  config.action_mailer.default_options = { from: "no-reply@localhost" }
+
+  config.action_mailer.smtp_settings = {
+    address:              'localhost', # or 127.0.0.1
+    port:                 25, # or 587, or 465 depending on postfix setup
+    domain:               'localhost',
+    user_name:            nil, # if you dont use user name
+    password:             nil, # if you dont use password
+    authentication:       nil, # :plain, :login, :cram_md5, no authentication if nil
+    enable_starttls_auto: false # or true, depending on postfix setup
+  }
+
+
   # Set localhost to be used by links generated in mailer templates.
   config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
 
