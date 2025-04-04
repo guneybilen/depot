@@ -163,7 +163,16 @@ class OrdersTest < ApplicationSystemTestCase
     click_button "Create Order"
 
     assert_text "Thank you for your order"
+   
+   
+    enqueued_jobs.each do |job|
+      puts "Job class: #{job[:job]}"
+      puts "Arguments: #{job[:args]}"
+    end
 
+    # during testing Order#received and 
+    # Order#shipped methods are still being called
+    # currently dont know the exact reason.
     perform_enqueued_jobs
     perform_enqueued_jobs
     perform_enqueued_jobs
