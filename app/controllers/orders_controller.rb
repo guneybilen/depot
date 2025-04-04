@@ -33,7 +33,7 @@ class OrdersController < ApplicationController
         Cart.destroy(session[:cart_id])
         session[:cart_id] = nil
         OrderMailer.received(@order).deliver_now
-        # ChargeOrderJob.perform_later(@order, pay_type_params.to_h)
+        ChargeOrderJob.perform_later(@order, pay_type_params.to_h)
         format.html { redirect_to store_index_url, notice: "Thank you for your order." }
         format.json { render :show, status: :created, location: @order }
       else
@@ -84,7 +84,7 @@ class OrdersController < ApplicationController
       end
     end
 
-=begin
+
     def pay_type_params
       if order_params[:pay_type] == "Credit card"
         params.require(:order).permit(:credit_card_number, :expiration_date)
@@ -96,5 +96,5 @@ class OrdersController < ApplicationController
         {}
       end
     end
-=end
+
 end
