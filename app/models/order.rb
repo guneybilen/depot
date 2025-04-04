@@ -50,7 +50,8 @@ class Order < ApplicationRecord
     if payment_result.succeeded?
       OrderMailer.received(self).deliver_later
     else
-      raise payment_result.error
+      OrderMailer.check_error("lib/pago.rb returned succeeded? as false").deliver_later
+      #raise payment_result.error
     end
   end
 end

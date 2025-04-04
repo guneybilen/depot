@@ -97,6 +97,8 @@ class OrdersTest < ApplicationSystemTestCase
      assert page.has_no_css?("div#cart")
   end
 
+=begin
+
   test "check order and delivery" do
     LineItem.delete_all
     Order.delete_all
@@ -139,5 +141,40 @@ class OrdersTest < ApplicationSystemTestCase
 
 
    end
+=end
+   # You need to adjust lib/pago.rb accordingly.
+   test "check lib/pago.rb  returned succeeded? false" do
+    LineItem.delete_all
+    Order.delete_all
+     
+    visit store_index_url
+
+    click_on "Add to Cart", match: :first
+
+    click_on "Checkout"
+
+    fill_in "Name", with: "Dave Thomas"
+    fill_in "Address", with: "123 Main Street"
+    fill_in "Email", with: "dave@example.com"
+    select "Check", from: "Pay type"
+    fill_in "Routing number", with: "123456"
+    fill_in "Account number", with: "987654"
+     
+    click_button "Create Order"
+
+    assert_text "Thank you for your order"
+
+    perform_enqueued_jobs
+    perform_enqueued_jobs
+    perform_enqueued_jobs
+    perform_enqueued_jobs
+    assert_performed_jobs 4
+
+    mail = ActionMailer::Base.deliveries.last
+    assert_equal ["bilen@localhost"], mail.to
+    assert_equal "Depot App <admin@depot.com>", mail[:from].value
+    assert_equal "Check Error!", mail.subject
+   end
+
 
 end

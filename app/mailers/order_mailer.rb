@@ -22,8 +22,8 @@ class OrderMailer < ApplicationMailer
     mail to: order.email, cc: "bilen@localhost", subject: "Pragmatic Store Order Shipped"
   end
 
-  def welcome(user)
-    @user = user
-    mail(to: 'bilen@localhost', subject: 'Welcome!')
+  def check_error(err)
+    @err = err
+    mail(to: 'bilen@localhost', subject: 'Check Error!')
   end
 end
